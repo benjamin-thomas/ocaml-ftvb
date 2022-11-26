@@ -8,6 +8,7 @@
    WITHOUT PATTERN MATCHING
    ========================
 *)
+
 let rec factorial n = if n = 1 then 1 else n * factorial (n - 1)
 let isvowel c = 'a' = c || 'e' = c || 'i' = c || 'o' = c || 'u' = c
 
@@ -78,20 +79,13 @@ let is_lower c =
   | _ -> false
 ;;
 
+(*$T is_upper
+is_upper 'c' = false
+is_upper 'A' = true
+is_upper '1' = false
+*)
 let is_upper c =
   match c with
   | 'A' .. 'Z' -> true
   | _ -> false
 ;;
-
-(*
-   qtest extract chapter03/main.ml -o chapter03/main_test.ml
-   rm ./chapter03/main_test.native 2>/dev/null; ocamlbuild -I chapter03/ -cflags -warn-error,+26 -use-ocamlfind -package oUnit -package qcheck ./chapter03/main_test.native
-   ./chapter03/_build/main_test.native
-*)
-
-(*$T add
-add 1 1 = 2
-add 1 4 = 3
-*)
-let add a b = a + b

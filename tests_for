@@ -1,7 +1,15 @@
 #!/bin/bash
 
-qtest extract "$1" -o "$1.test.ml"
+# ./tests_for ./chapter03/main.ml
 
-# rm ./chapter03/main_test.native 2>/dev/null
-ocamlbuild -I $(dirname "S1") -cflags -warn-error,+26 -use-ocamlfind -package oUnit -package qcheck "$1.test.native"
-# ./chapter03/_build/main_test.native
+set -e
+
+DIR=$(dirname $1)
+FILE=$(basename $1)
+DEST=${FILE%.ml}_test_examples
+
+cd $DIR
+qtest --quiet extract ./$FILE -o ./$DEST.ml
+ocamlbuild -quiet -cflags -warn-error,+26 -use-ocamlfind -package oUnit -package qcheck ./$DEST.native
+./$DEST.native
+cd -
