@@ -87,9 +87,6 @@ let is_upper c =
   | _ -> false
 ;;
 
-let%test _ = is_upper 'c' = false
 let%test _ = is_upper 'A' = true
-let%test _ = is_upper 'B' = true
-let%test _ = is_upper 'C' = true
-let%test _ = is_upper 'D' = true
-let%test _ = is_upper 'd' = false
+let%test _ = is_upper 'a' = false
+let%test _ = is_upper '1' = false

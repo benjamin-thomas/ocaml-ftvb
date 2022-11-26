@@ -1,5 +1,5 @@
 (library
- (name chapter04)
+ (name lib)
  (inline_tests)
  (preprocess
   (pps ppx_expect)))

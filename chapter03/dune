@@ -1,5 +1,0 @@
-(library
- (name chapter03)
- (inline_tests)
- (preprocess
-  (pps ppx_expect)))
