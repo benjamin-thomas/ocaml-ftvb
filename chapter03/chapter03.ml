@@ -2,6 +2,8 @@
    while true;do utop -init ./chapter03/main.ml;done
 
    #use "chapter03/main.ml";
+
+   dune runtest --watch
 *)
 
 (*
@@ -22,7 +24,7 @@ let rec gcd a b = if b = 0 then a else gcd b (a mod b)
 let rec factorial' n =
   match n with
   | 1 -> 1
-  | _ -> n * factorial (n - 1)
+  | _ -> n * factorial' (n - 1)
 ;;
 
 let isvowel' c =
@@ -43,7 +45,7 @@ let isvowel'' c =
 let rec gcd' a b =
   match b with
   | 0 -> a
-  | _ -> gcd b (a mod b)
+  | _ -> gcd' b (a mod b)
 ;;
 
 (*
@@ -79,13 +81,15 @@ let is_lower c =
   | _ -> false
 ;;
 
-(*$T is_upper
-is_upper 'c' = false
-is_upper 'A' = true
-is_upper '1' = false
-*)
 let is_upper c =
   match c with
   | 'A' .. 'Z' -> true
   | _ -> false
 ;;
+
+let%test _ = is_upper 'c' = false
+let%test _ = is_upper 'A' = true
+let%test _ = is_upper 'B' = true
+let%test _ = is_upper 'C' = true
+let%test _ = is_upper 'D' = true
+let%test _ = is_upper 'd' = false
