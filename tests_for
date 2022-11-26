@@ -1,0 +1,7 @@
+#!/bin/bash
+
+qtest extract "$1" -o "$1.test.ml"
+
+# rm ./chapter03/main_test.native 2>/dev/null
+ocamlbuild -I $(dirname "S1") -cflags -warn-error,+26 -use-ocamlfind -package oUnit -package qcheck "$1.test.native"
+# ./chapter03/_build/main_test.native
