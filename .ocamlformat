@@ -1,0 +1,4 @@
+if-then-else=k-r
+break-cases=all
+# parens-tuple=always
+# parens-tuple-patterns=always

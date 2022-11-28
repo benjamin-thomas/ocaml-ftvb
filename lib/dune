@@ -2,4 +2,4 @@
  (name lib)
  (inline_tests)
  (preprocess
-  (pps ppx_expect)))
+  (pps ppx_inline_test)))
