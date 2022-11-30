@@ -55,7 +55,7 @@ let%test _ = sum [ 1; 3 ] = 4
    Avoid large build ups of 1 + 1 + 1 ... by passing an accumlator internally.
    Recursive functions which do not build up a growing intermediate representation are known as "tail recursive".
  *)
-let length2 lst =
+let length_tr lst =
   let rec inner lst n =
     match lst with
     | [] -> n
@@ -63,8 +63,8 @@ let length2 lst =
   in
   inner lst 0
 
-let%test _ = length2 [] = 0
-let%test _ = length2 [ 2; 4; 6 ] = 3
+let%test _ = length_tr [] = 0
+let%test _ = length_tr [ 2; 4; 6 ] = 3
 (*
 length2    [ 2; 4; 6 ]
  ~> inner  [ 2; 4; 6 ] 0
