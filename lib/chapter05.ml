@@ -27,7 +27,7 @@ let%test _ = sort [ 3; 2; 1 ] = [ 1; 2; 3 ]
 let%test _ = sort [ 1; 2; 3 ] = [ 1; 2; 3 ]
 
 (*
-Cost is O(n²)
+Cost is O(n²) I think
 00 sort [ 3; 2; 1 ]
 01   ~> insert 3 (sort [ 2; 1 ])
 02   ~> insert 3 (insert 2 (sort [ 1 ]))
@@ -106,12 +106,40 @@ let%test_unit _ = rev_inssort [ 1 ] == [ 1 ]
 let%test_unit _ = rev_inssort [ 1; 2 ] == [ 2; 1 ]
 let%test_unit _ = rev_inssort [ 1; 2; 3 ] == [ 3; 2; 1 ]
 
+(* 3a. Or by specifying the compare operator! *)
+type direction = Asc | Desc
+
+let rec inssort' dir lst =
+  let cmp =
+    match dir with
+    | Asc -> ( <= )
+    | Desc -> ( >= )
+  in
+  let rec insert a lst =
+    match lst with
+    | [] -> [ a ]
+    | x :: xs -> (
+        match cmp a x with
+        | true -> a :: x :: xs
+        | false -> x :: insert a xs)
+  in
+  match lst with
+  | [] -> []
+  | x :: xs -> insert x (inssort' dir xs)
+
+let%test_unit _ = inssort' Asc [ 1; 4; 3; 5; 2 ] == [ 1; 2; 3; 4; 5 ]
+let%test_unit _ = inssort' Desc [ 1; 4; 3; 5; 2 ] == [ 5; 4; 3; 2; 1 ]
+
 (* 4. Write a function that detects if a list is already sorted *)
 let rec is_sorted lst =
   match lst with
   | [] -> true
   | [ _ ] -> true
-  | a :: b :: t -> if a > b then false else is_sorted t
+  | a :: b :: t ->
+      if a > b then
+        false
+      else
+        is_sorted t
 
 let%test _ = is_sorted []
 let%test _ = is_sorted [ 1 ]
