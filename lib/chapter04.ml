@@ -177,7 +177,14 @@ let count_true lst =
   let rec inner lst acc =
     match lst with
     | [] -> acc
-    | x :: xs -> inner xs (acc + if x = true then 1 else 0)
+    | x :: xs ->
+        inner xs
+          (acc
+          +
+          if x = true then
+            1
+          else
+            0)
   in
   inner lst 0
 
@@ -261,7 +268,12 @@ let make_set lst =
   let rec inner lst acc =
     match lst with
     | [] -> acc
-    | x :: xs -> inner xs (if member x acc then acc else x :: acc)
+    | x :: xs ->
+        inner xs
+          (if member x acc then
+            acc
+          else
+            x :: acc)
   in
   inner lst [] |> List.rev
 

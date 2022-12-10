@@ -1,5 +1,6 @@
 (library
  (name lib)
  (inline_tests)
+ (libraries expect_test_helpers_core)
  (preprocess
-  (pps ppx_inline_test ppx_assert ppx_expect)))
+  (pps ppx_inline_test ppx_jane)))
