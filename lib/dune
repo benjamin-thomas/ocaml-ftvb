@@ -1,6 +1,11 @@
 (library
  (name lib)
  (inline_tests)
- (libraries expect_test_helpers_core)
+ (libraries expect_test_helpers_core sexplib)
  (preprocess
-  (pps ppx_inline_test ppx_jane)))
+  (pps
+   ppx_inline_test
+   ppx_deriving.ord
+   ; ppx_deriving.eq
+   ; ppx_deriving.show
+   ppx_jane)))
