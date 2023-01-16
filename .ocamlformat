@@ -12,5 +12,13 @@ let-binding-spacing=double-semicolon
 # Add new lines when applying multiple pipe operators!!
 break-infix=fit-or-vertical
 
+# Prefix the semicolon operator, this makes chaining expressions easier
+# (no need to remember to add one every new line before the final expression
+sequence-style=before
+
+# ocamlformat replaces begin/end blocks with parens by default!
+# Its later formatting makes using begin/end block pretty unreadable :(
+# exp-grouping=preserve
+
 # parens-tuple=always
 # parens-tuple-patterns=always
