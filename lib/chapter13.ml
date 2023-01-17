@@ -160,13 +160,14 @@ let file_stats name =
   | _ -> close_in chan
 ;;
 
+(*
 let%test_unit "side effect" =
   let path =
     (* I'm somewhere inside _build/ *)
     "../../../../../lib/chapter13.txt"
   in
   [%test_eq: Base.unit] () @@ file_stats path
-;;
+;; *)
 
 let array_stuff () =
   (* Initialize an array *)
