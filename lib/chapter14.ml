@@ -102,14 +102,7 @@ let%test_unit _ =
 
 let star x =
   let i = int_of_float (floor (x *. 50.0)) in
-  let i' =
-    if i = 50 then
-      49
-    else
-      i
-  in
-  (* let () = Printf.printf "i=%d\t\ti'=%d\n" i i in *)
-  for _ = 1 to i' - 1 do
+  for _ = 1 to i - 1 do
     print_char ' '
   done
   ; print_char '*'
@@ -126,4 +119,32 @@ let plot f a b dy =
     star (f !pos)
     ; pos := !pos +. dy
   done
+;;
+
+let%expect_test _ =
+  let pi = 4.0 *. atan 1.0 in
+  let () = plot sin 0.0 pi (pi /. 20.0) in
+  [%expect
+    {|
+    *
+          *
+                  *
+                         *
+                                *
+                                      *
+                                           *
+                                               *
+                                                  *
+                                                    *
+                                                     *
+                                                    *
+                                                  *
+                                               *
+                                           *
+                                      *
+                                *
+                         *
+                  *
+          *
+    * |}]
 ;;
