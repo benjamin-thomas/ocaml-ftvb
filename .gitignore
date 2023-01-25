@@ -2,3 +2,7 @@
 *.log
 _build/
 *_test_examples*
+**/*.cmo
+**/*.cmi
+**/*.out
+.ocaml.pid
