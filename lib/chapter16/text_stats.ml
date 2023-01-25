@@ -1,16 +1,8 @@
 (*
    Text statistics
 
-   $ ocamlc ./text_stats.ml
-   $ ocaml
-   # #use "down.top";;
-   # #load "./text_stats.cmo";;
-   # Text_stats.stats_of_file "../chapter13.txt";;
-   - : int * int * int * int = (8, 461, 77, 4)
-
+   To run, see: Procfile.dev
  *)
-
-let hello = 12
 
 type stats = int * int * int * int
 
@@ -45,7 +37,7 @@ let stats_of_channel ic =
   | End_of_file -> (!lines, !chars, !words, !sentences)
 ;;
 
-let stats_of_file path =
+let stats_of_file (path : string) : stats =
   let chan = open_in path in
   let stats = stats_of_channel chan in
   close_in chan

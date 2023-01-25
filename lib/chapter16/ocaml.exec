@@ -1,4 +1,0 @@
-#!/bin/bash
-
-echo $$ >./.ocaml.pid
-exec ocaml

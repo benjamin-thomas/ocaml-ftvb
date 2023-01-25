@@ -5,4 +5,4 @@ _build/
 **/*.cmo
 **/*.cmi
 **/*.out
-.ocaml.pid
+.utop.pid

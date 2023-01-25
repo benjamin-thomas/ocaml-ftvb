@@ -1,9 +1,8 @@
 # Launch with:
 #   foreman start -f Procfile.dev
-# Then start (in another terminal):
-#   while true;do ./ocaml.exec;sleep 0.1;done
 #
-# Usefull commands:
-#   rm ~/.config/ocaml/history.ml
-compile: find *.ml | entr -p ocamlc /_
-kill_repl: find *.cmo | entr -p bash -c 'kill $(cat ./.ocaml.pid)'
+# Then start (in another terminal):
+#   while true;do ./utop.exec;sleep 0.1;done
+#
+compile: ls -1 *.ml | entr -p -s 'ocamlc $0i $0'
+kill_repl: ls -1 *.cmo | entr -p bash -c 'kill $(cat ./.utop.pid)'
