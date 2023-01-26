@@ -1,5 +1,8 @@
 (*
    echo ./stats.ml | entr -c bash -c 'ocamlc ./text_stats.ml{i,} ./stats.ml && ./a.out ../chapter13.txt'
+
+   ocamlc ./text_stats.ml{i,} ./stats.ml
+   ocamlopt ./text_stats.ml{i,} ./stats.ml
 *)
 
 module Ansi = struct
@@ -12,22 +15,22 @@ type path = Valid_path of string
 let print_stats (Valid_path p) =
   let s = Text_stats.stats_of_file p in
 
-  print_endline "Stats for chapter13.txt:"
+  print_endline @@ "Stats for: " ^ p
 ; print_newline ()
 
-; print_string "Words :"
+; print_string "Words     : "
 ; print_int @@ Text_stats.words s
 ; print_newline ()
 
-; print_string "Chars :"
+; print_string "Chars     : "
 ; print_int @@ Text_stats.chars s
 ; print_newline ()
 
-; print_string "Sentences :"
+; print_string "Sentences : "
 ; print_int @@ Text_stats.sentences s
 ; print_newline ()
 
-; print_string "Lines :"
+; print_string "Lines     : "
 ; print_int @@ Text_stats.lines s
 ; print_newline ()
 

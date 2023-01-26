@@ -2,7 +2,11 @@
 *.log
 _build/
 *_test_examples*
+
 **/*.cmo
 **/*.cmi
 **/*.out
+
+**/*.cmx
+**/*.o
 .utop.pid
