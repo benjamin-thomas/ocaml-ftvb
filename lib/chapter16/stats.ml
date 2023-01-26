@@ -33,16 +33,20 @@ let print_stats (Valid_path p) =
 ; print_string "Lines     : "
 ; print_int @@ Text_stats.lines s
 ; print_newline ()
+;;
+
+let validate path =
+  if Sys.file_exists path then
+    Ok (Valid_path path)
+  else
+    Error ("file does not exist: " ^ "'" ^ path ^ "'")
+;;
 
 let valid_path_result =
-  if Array.length Sys.argv != 2 then
-    Error "must provide file name"
-  else
-    let path = Sys.argv.(1) in
-    if Sys.file_exists path then
-      Ok (Valid_path path)
-    else
-      Error ("file does not exist: " ^ "'" ^ path ^ "'")
+  match Sys.argv with
+  | [|_; path|] -> validate path
+  | _           -> Error "must provide file name"
+;;
 
 let () =
   match valid_path_result with
@@ -50,3 +54,4 @@ let () =
   | Error reason ->
     print_endline @@ Ansi.red ^ "ERROR: " ^ reason ^ Ansi.rst
   ; print_endline "Usage: ./stats.exe PATH"
+;;
