@@ -1,0 +1,3 @@
+(executable
+ (name rev)
+ (libraries rev_lib))
