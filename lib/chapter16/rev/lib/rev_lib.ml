@@ -6,6 +6,7 @@
   Run binary
 
     dune exec --display=quiet ./bin/rev.exe
+    dune exec --display=quiet ./bin/rev.exe /tmp/tmp # generates the file /tmp/tmp.rev
 
   NOTE:
 
@@ -30,5 +31,23 @@ let valid_path_of_string p =
     Ok (Valid_path p)
 ;;
 
-let rev_file (Valid_path p) = print_endline @@ "Ready to work on: " ^ p
-let hello = 23
+let do_rev ic oc =
+  let out = ref [] in
+  try
+    while true do
+      let line = input_line ic in
+      out := line :: !out
+    done
+  with
+  | End_of_file ->
+      let output = String.concat "\n" !out ^ "\n" in
+      output_string oc output
+;;
+
+let rev_file (Valid_path p) =
+  let ic = open_in p in
+  let oc = open_out (p ^ ".rev") in
+  do_rev ic oc
+  ; close_in ic
+  ; close_out oc
+;;
