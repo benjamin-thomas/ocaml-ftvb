@@ -9,30 +9,24 @@ module Ansi = struct
   let rst = "\027[m"
 end
 
-type error = App_error of string
-
 let usage () = print_endline "Usage: rev.exe PATH"
 
-let do_exit (App_error msg) code =
+type 'a error = Error of 'a
+
+let do_exit (Error msg) code =
   print_endline @@ Ansi.red ^ "ERROR => " ^ msg ^ Ansi.rst
   ; usage ()
   ; exit code
 ;;
 
-(* let do_exit (Error msg) code =
-     print_endline @@ Ansi.red ^ "ERROR => " ^ msg ^ Ansi.rst
-     ; usage ()
-     ; exit code
-   ;; *)
-
 let run path =
   match Rev_lib.valid_path_of_string path with
   | Ok vp -> Rev_lib.rev_file vp
-  | Error msg -> do_exit (App_error msg) 2
+  | Error msg -> do_exit (Error msg) 2
 ;;
 
 let () =
   match Sys.argv with
   | [| _; path |] -> run path
-  | _ -> do_exit (App_error "missing argument") 1
+  | _ -> do_exit (Error "missing argument") 1
 ;;
