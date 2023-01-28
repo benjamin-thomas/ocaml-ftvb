@@ -37,13 +37,8 @@ let do_rev ic oc =
     | End_of_file -> acc
   in
 
-  let rec put_lines lst =
-    match lst with
-    | [] -> ()
-    | h :: t ->
-        output_string oc (h ^ "\n")
-        ; put_lines t
-  in
+  let output_line line = output_string oc (line ^ "\n") in
+  let put_lines = List.iter output_line in
 
   build_lines [] |> put_lines
 ;;
