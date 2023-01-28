@@ -32,16 +32,20 @@ let valid_path_of_string p =
 ;;
 
 let do_rev ic oc =
-  let out = ref [] in
-  try
-    while true do
-      let line = input_line ic in
-      out := line :: !out
-    done
-  with
-  | End_of_file ->
-      let output = String.concat "\n" !out ^ "\n" in
-      output_string oc output
+  let rec build_lines acc =
+    try build_lines (input_line ic :: acc) with
+    | End_of_file -> acc
+  in
+
+  let rec put_lines lst =
+    match lst with
+    | [] -> ()
+    | h :: t ->
+        output_string oc (h ^ "\n")
+        ; put_lines t
+  in
+
+  build_lines [] |> put_lines
 ;;
 
 let rev_file (Valid_path p) =
