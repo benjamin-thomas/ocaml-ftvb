@@ -22,7 +22,7 @@ let run frag path =
   | Error msg -> do_exit (Error msg) 2
   | Ok vp ->
       print_endline "Results:"
-      ; Grep_lib.filter frag vp |> print_endline
+      ; Grep_lib.filter ~frag vp |> print_endline
 ;;
 
 let () =

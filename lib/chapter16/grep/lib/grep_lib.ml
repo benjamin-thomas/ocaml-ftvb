@@ -38,8 +38,7 @@ let find_frag ic frag =
   loop ic []
 ;;
 
-let filter : string -> valid_path -> string =
- fun frag (Valid_path path) ->
+let filter ~frag (Valid_path path) =
   let ic = open_in path in
   let found = find_frag ic frag in
   close_in ic
