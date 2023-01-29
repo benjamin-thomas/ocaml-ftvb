@@ -23,8 +23,7 @@
   Write and compile a standalone program to reverse the lines in a text file, writing to another file.
 *)
 
-
-type path = Valid_path of string
+type valid_path = Valid_path of string
 
 let valid_path_of_string p =
   if not @@ Sys.file_exists p then
