@@ -22,3 +22,6 @@ sequence-style=before
 
 # parens-tuple=always
 # parens-tuple-patterns=always
+
+parens-tuple=always
+parens-tuple-patterns=always
